@@ -1,0 +1,1520 @@
+<html data-dpr="1" style="font-size: 37.52px;">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no,viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <title>学信档案</title>
+  <link rel="icon" href="https://t1.chei.com.cn/archive/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://t1.chei.com.cn/archive/fonts/chsi-font.css">
+  <link rel="stylesheet" href="https://t3.chei.com.cn/archive/mobile/css/app.css?v=20250711">
+  <link rel="stylesheet" href="https://t1.chei.com.cn/common/ch/iconfont.css">
+  <link rel="stylesheet" href="https://t1.chei.com.cn/common/css/font/RareWords/RareWordsFonts.css">
+  <!-- <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script> -->
+  <script type="text/javascript" async=""
+    src="https://www.googletagmanager.com/gtag/js?id=G-RNH4PZV76K&amp;cx=c&amp;gtm=4e5al1"></script>
+  <script src="https://hm.baidu.com/hm.js?ed4ddcd4078a486f1f5760a6c426b738"></script>
+  <script src="https://t1.chei.com.cn/common/js/vue/2.5.6/vue.min.js"></script>
+  <script src="https://t1.chei.com.cn/archive/mobile/js/vant1.47/vant.min.js"></script>
+  <script src="https://t4.chei.com.cn/common/js/api-1.0.4.js"></script>
+  <script src="https://t1.chei.com.cn/archive/mobile/js/vendors-1.0.0.js"></script>
+  <script src="https://t2.chei.com.cn/archive/mobile/js/app-1.0.3.js"></script>
+  <script src="https://t3.chei.com.cn/archive/mobile/js/lodash.min.js"></script>
+  <script src="https://t4.chei.com.cn/archive/mobile/js/jweixin-1.6.0.js"></script>
+
+  <style>
+    .extra-wrap {
+      display: flex;
+      align-items: center;
+    }
+
+    .extra-wrap .red {
+      margin-right: 5px;
+      color: #e85759;
+    }
+
+    .vote-order-ul li {
+      align-items: center;
+    }
+
+    .vote-order-ul .vue-checkbox {
+      display: inline-block;
+      margin-right: 10px;
+      white-space: nowrap;
+      position: relative;
+      line-height: 1;
+      vertical-align: middle;
+      cursor: pointer;
+      outline: 0;
+    }
+
+    .vote-order-ul .vue-checkbox .vue-checkbox-inner {
+      display: inline-block;
+      position: relative;
+      width: .426rem;
+      height: .426rem;
+      top: 0;
+      left: 0;
+      background-color: #fff;
+      border: 1px solid #969799;
+      border-radius: 2px;
+      transition: all .2s ease-in-out;
+    }
+
+    .vote-order-ul .vue-checkbox .checked-box-order {
+      display: inline-block;
+      position: relative;
+      width: .426rem;
+      height: .426rem;
+      top: 0;
+      left: 0;
+      color: #fff;
+      border-radius: 2px;
+      text-align: center;
+      background-color: #25b887;
+      border: 1px solid #25b887;
+      transition: all .2s ease-in-out;
+    }
+
+    .jy-vote .sub_sub_title {
+      font-size: .373rem;
+      margin-top: 0.45rem;
+      font-weight: 700;
+    }
+
+    .checkbox-trans-list-item {
+      transition: all 1s;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .checkbox-trans-list-enter,
+    .checkbox-trans-list-leave-to {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .checkbox-trans-list-leave-active {
+      position: absolute;
+    }
+
+    .gxbys-vote .line-input {
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+
+    /* 重写字体 */
+    .nameFamily {
+      font-family: Chsi, "rare-words-font";
+    }
+
+    .sur-input {
+      /* width: 100%;            */
+      margin-left: .267rem;
+      padding: .133rem .267rem;
+      font-size: .4rem;
+      line-height: .56rem;
+      border: 1px solid #dde5ed;
+      box-sizing: border-box;
+      border-radius: .16rem;
+      -webkit-appearance: none;
+    }
+
+    .extra-wrap .sur-input {
+      flex: 1
+    }
+
+    .wap-vote-jz {
+      border: 1px solid #E8EAED;
+    }
+
+    .wap-vote-jz .jz-head {
+      display: flex;
+      background-color: #F7F8FA;
+      border-bottom: 1px solid #E8EAED;
+      font-size: .373rem;
+      line-height: 2.5;
+    }
+
+    .jy-vote .wap-vote-jz .jz-item {
+      flex: 1;
+      text-align: center;
+    }
+
+    .jy-vote .wap-vote-jz .van-radio-group {
+      display: flex;
+      padding: 0
+    }
+
+    .jy-vote .wap-vote-jz .van-radio-group .van-radio {
+      flex: 1;
+      justify-content: center;
+    }
+
+    .jy-vote .wap-vote-jz p.sub_title {
+      padding-left: 0;
+      padding-right: 0;
+      font-weight: 400;
+      font-size: 0.347rem;
+    }
+
+    .jy-vote .wap-vote-jz p.shgl-vote {}
+
+    .jy-vote .wap-vote-jz p.sub_title.extra-wrap {
+      padding-right: .267rem;
+    }
+
+    .vote-vee .bg-des {
+      padding: .373rem;
+      background: #f7f9f9;
+    }
+
+    .shgl-vote .sm {
+      padding: 0.267rem;
+      color: #666;
+      line-height: 1.8;
+      font-size: .373rem;
+    }
+
+    .shgl-vote .sm p {
+      text-indent: 2em;
+    }
+
+    .shgl-vote .sm .textR {
+      text-align: right;
+    }
+
+    .shgl-vote .wap-vote-jz .jz-head {
+      line-height: 1.3;
+      padding: 0.267rem 0;
+      font-weight: 700;
+    }
+
+    .shgl-vote.jy-vote .wap-vote-jz p.sub_title {
+      padding-left: 0.267rem;
+      padding-right: 0.267rem;
+    }
+
+    .shgl-vote .wap-vote-jz {
+      padding-bottom: 0.32rem
+    }
+
+    .ques-checkbox div.van-checkbox__icon,
+    .ques-checkbox .select-border .van-icon {
+      width: 20px;
+    }
+
+    .checkbox-trans-list-item-2025 {
+      margin-right: 0;
+    }
+
+    .jy-vote .select-border-qzsj {
+      margin-top: 0;
+      padding: 0.05rem 0.16rem;
+      width: 2.2rem;
+      margin: 0 0.16rem;
+    }
+
+    .jy-vote .select-border-qzsj-box .select-border-qzsj:first-child {
+      width: 3.1rem;
+    }
+  </style>
+
+  <style type="text/css">
+    @font-face {
+      font-family: "xm-iconfont";
+      src: url('//at.alicdn.com/t/font_792691_ptvyboo0bno.eot?t=1574048839056');
+      /* IE9 */
+      src: url('//at.alicdn.com/t/font_792691_ptvyboo0bno.eot?t=1574048839056#iefix') format('embedded-opentype'),
+        /* IE6-IE8 */
+        url('data:application/x-font-woff2;charset=utf-8;base64,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') format('woff2'), url('//at.alicdn.com/t/font_792691_ptvyboo0bno.woff?t=1574048839056') format('woff'), url('//at.alicdn.com/t/font_792691_ptvyboo0bno.ttf?t=1574048839056') format('truetype'),
+        /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+        url('//at.alicdn.com/t/font_792691_ptvyboo0bno.svg?t=1574048839056#iconfont') format('svg');
+      /* iOS 4.1- */
+    }
+
+    .xm-iconfont {
+      font-family: "xm-iconfont" !important;
+      font-size: 16px;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .xm-icon-quanxuan:before {
+      content: "\e62c";
+    }
+
+    .xm-icon-caidan:before {
+      content: "\e610";
+    }
+
+    .xm-icon-fanxuan:before {
+      content: "\e837";
+    }
+
+    .xm-icon-pifu:before {
+      content: "\e668";
+    }
+
+    .xm-icon-qingkong:before {
+      content: "\e63e";
+    }
+
+    .xm-icon-sousuo:before {
+      content: "\e600";
+    }
+
+    .xm-icon-danx:before {
+      content: "\e62b";
+    }
+
+    .xm-icon-duox:before {
+      content: "\e613";
+    }
+
+    .xm-icon-close:before {
+      content: "\e601";
+    }
+
+    .xm-icon-expand:before {
+      content: "\e641";
+    }
+
+    .xm-icon-banxuan:before {
+      content: "\e60d";
+    }
+  </style>
+  <style type="text/css">
+    @-webkit-keyframes xm-upbit {
+      from {
+        -webkit-transform: translate3d(0, 30px, 0);
+        opacity: 0.3;
+      }
+
+      to {
+        -webkit-transform: translate3d(0, 0, 0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes xm-upbit {
+      from {
+        transform: translate3d(0, 30px, 0);
+        opacity: 0.3;
+      }
+
+      to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+      }
+    }
+
+    @-webkit-keyframes loader {
+      0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes loader {
+      0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    xm-select {
+      background-color: #FFF;
+      position: relative;
+      border: 1px solid #E6E6E6;
+      border-radius: 2px;
+      display: block;
+      width: 100%;
+      cursor: pointer;
+      outline: none;
+    }
+
+    xm-select * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-size: 14px;
+      font-weight: 400;
+      text-overflow: ellipsis;
+      user-select: none;
+      -ms-user-select: none;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+    }
+
+    xm-select:hover,
+    xm-select:focus {
+      border-color: #C0C4CC;
+    }
+
+    xm-select>.xm-tips {
+      color: #999999;
+      padding: 0 10px;
+      position: absolute;
+      display: flex;
+      height: 100%;
+      align-items: center;
+    }
+
+    xm-select>.xm-icon {
+      display: inline-block;
+      overflow: hidden;
+      position: absolute;
+      width: 0;
+      height: 0;
+      right: 10px;
+      top: 50%;
+      margin-top: -3px;
+      cursor: pointer;
+      border: 6px dashed transparent;
+      border-top-color: #C2C2C2;
+      border-top-style: solid;
+      transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+    }
+
+    xm-select>.xm-icon-expand {
+      margin-top: -9px;
+      transform: rotate(180deg);
+    }
+
+    xm-select>.xm-label.single-row {
+      position: absolute;
+      top: 0;
+      bottom: 0px;
+      left: 0px;
+      right: 30px;
+      overflow: auto hidden;
+    }
+
+    xm-select>.xm-label.single-row .scroll {
+      overflow-y: hidden;
+    }
+
+    xm-select>.xm-label.single-row .label-content {
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+
+    xm-select>.xm-label.auto-row .label-content {
+      flex-wrap: wrap;
+      padding-right: 30px !important;
+    }
+
+    xm-select>.xm-label.auto-row .xm-label-block>span {
+      white-space: unset;
+      height: 100%;
+    }
+
+    xm-select>.xm-label .scroll .label-content {
+      display: flex;
+      padding: 3px 10px;
+    }
+
+    xm-select>.xm-label .xm-label-block {
+      display: flex;
+      position: relative;
+      padding: 0px 5px;
+      margin: 2px 5px 2px 0;
+      border-radius: 3px;
+      align-items: baseline;
+      color: #FFF;
+    }
+
+    xm-select>.xm-label .xm-label-block>span {
+      display: flex;
+      color: #FFF;
+      white-space: nowrap;
+    }
+
+    xm-select>.xm-label .xm-label-block>i {
+      color: #FFF;
+      margin-left: 8px;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+    }
+
+    xm-select>.xm-label .xm-label-block.disabled {
+      background-color: #C2C2C2 !important;
+      cursor: no-drop !important;
+    }
+
+    xm-select>.xm-label .xm-label-block.disabled>i {
+      cursor: no-drop !important;
+    }
+
+    xm-select>.xm-body {
+      position: absolute;
+      left: 0;
+      top: 42px;
+      padding: 5px 0;
+      z-index: 999;
+      width: 100%;
+      min-width: fit-content;
+      border: 1px solid #E6E6E6;
+      background-color: #fff;
+      border-radius: 2px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+      animation-name: xm-upbit;
+      animation-duration: 0.3s;
+      animation-fill-mode: both;
+    }
+
+    xm-select>.xm-body .scroll-body {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    xm-select>.xm-body .scroll-body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    xm-select>.xm-body .scroll-body::-webkit-scrollbar-track {
+      -webkit-border-radius: 2em;
+      -moz-border-radius: 2em;
+      -ms-border-radius: 2em;
+      border-radius: 2em;
+      background-color: #FFF;
+    }
+
+    xm-select>.xm-body .scroll-body::-webkit-scrollbar-thumb {
+      -webkit-border-radius: 2em;
+      -moz-border-radius: 2em;
+      -ms-border-radius: 2em;
+      border-radius: 2em;
+      background-color: #C2C2C2;
+    }
+
+    xm-select>.xm-body.up {
+      top: auto;
+      bottom: 42px;
+    }
+
+    xm-select>.xm-body.relative {
+      position: relative;
+      display: block !important;
+      top: 0;
+      box-shadow: none;
+      border: none;
+      animation-name: none;
+      animation-duration: 0;
+      min-width: 100%;
+    }
+
+    xm-select>.xm-body .xm-group {
+      cursor: default;
+    }
+
+    xm-select>.xm-body .xm-group-item {
+      display: inline-block;
+      cursor: pointer;
+      padding: 0 10px;
+      color: #999;
+      font-size: 12px;
+    }
+
+    xm-select>.xm-body .xm-option {
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 0 10px;
+      cursor: pointer;
+    }
+
+    xm-select>.xm-body .xm-option-icon {
+      color: transparent;
+      display: flex;
+      border: 1px solid #E6E6E6;
+      border-radius: 3px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    xm-select>.xm-body .xm-option-icon.xm-custom-icon {
+      color: unset;
+      border: unset;
+    }
+
+    xm-select>.xm-body .xm-option-icon-hidden {
+      margin-right: -10px;
+    }
+
+    xm-select>.xm-body .xm-option-icon.xm-icon-danx {
+      border-radius: 100%;
+    }
+
+    xm-select>.xm-body .xm-option-content {
+      display: flex;
+      position: relative;
+      padding-left: 15px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      ;
+      width: calc(100% - 20px);
+    }
+
+    xm-select>.xm-body .xm-option.hide-icon .xm-option-content {
+      padding-left: 0;
+    }
+
+    xm-select>.xm-body .xm-option.selected.hide-icon .xm-option-content {
+      color: #FFF !important;
+    }
+
+    xm-select>.xm-body .xm-option .loader {
+      width: 0.8em;
+      height: 0.8em;
+      margin-right: 6px;
+      color: #C2C2C2;
+    }
+
+    xm-select>.xm-body .xm-select-empty {
+      text-align: center;
+      color: #999;
+    }
+
+    xm-select>.xm-body .disabled {
+      cursor: no-drop;
+    }
+
+    xm-select>.xm-body .disabled:hover {
+      background-color: #FFF;
+    }
+
+    xm-select>.xm-body .disabled .xm-option-icon {
+      border-color: #C2C2C2 !important;
+    }
+
+    xm-select>.xm-body .disabled .xm-option-content {
+      color: #C2C2C2 !important;
+    }
+
+    xm-select>.xm-body .disabled.selected>.xm-option-icon {
+      color: #C2C2C2 !important;
+    }
+
+    xm-select>.xm-body .xm-search {
+      background-color: #FFF !important;
+      position: relative;
+      padding: 0 10px;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+
+    xm-select>.xm-body .xm-search>i {
+      position: absolute;
+      color: ;
+    }
+
+    xm-select>.xm-body .xm-search-input {
+      border: none;
+      border-bottom: 1px solid #E6E6E6;
+      padding-left: 27px;
+      cursor: text;
+    }
+
+    xm-select>.xm-body .xm-paging {
+      padding: 0 10px;
+      display: flex;
+      margin-top: 5px;
+    }
+
+    xm-select>.xm-body .xm-paging>span:first-child {
+      border-radius: 2px 0 0 2px;
+    }
+
+    xm-select>.xm-body .xm-paging>span:last-child {
+      border-radius: 0 2px 2px 0;
+    }
+
+    xm-select>.xm-body .xm-paging>span {
+      display: flex;
+      flex: auto;
+      justify-content: center;
+      vertical-align: middle;
+      margin: 0 -1px 0 0;
+      background-color: #fff;
+      color: #333;
+      font-size: 12px;
+      border: 1px solid #e2e2e2;
+      flex-wrap: nowrap;
+      width: 100%;
+      overflow: hidden;
+      min-width: 50px;
+    }
+
+    xm-select>.xm-body .xm-toolbar {
+      padding: 0 10px;
+      display: flex;
+      margin: -3px 0;
+      cursor: default;
+    }
+
+    xm-select>.xm-body .xm-toolbar .toolbar-tag {
+      cursor: pointer;
+      display: flex;
+      margin-right: 20px;
+      color: ;
+      align-items: baseline;
+    }
+
+    xm-select>.xm-body .xm-toolbar .toolbar-tag:hover {
+      opacity: 0.8;
+    }
+
+    xm-select>.xm-body .xm-toolbar .toolbar-tag:active {
+      opacity: 1;
+    }
+
+    xm-select>.xm-body .xm-toolbar .toolbar-tag>i {
+      margin-right: 2px;
+      font-size: 14px;
+    }
+
+    xm-select>.xm-body .xm-toolbar .toolbar-tag:last-child {
+      margin-right: 0;
+    }
+
+    xm-select>.xm-body .xm-body-custom {
+      line-height: initial;
+      cursor: default;
+    }
+
+    xm-select>.xm-body .xm-body-custom * {
+      box-sizing: initial;
+    }
+
+    xm-select>.xm-body .xm-tree {
+      position: relative;
+    }
+
+    xm-select>.xm-body .xm-tree-icon {
+      display: inline-block;
+      margin-right: 3px;
+      cursor: pointer;
+      border: 6px dashed transparent;
+      border-left-color: #C2C2C2;
+      border-left-style: solid;
+      transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      z-index: 2;
+      visibility: hidden;
+    }
+
+    xm-select>.xm-body .xm-tree-icon.expand {
+      margin-top: 3px;
+      margin-right: 5px;
+      margin-left: -2px;
+      transform: rotate(90deg);
+    }
+
+    xm-select>.xm-body .xm-tree-icon.xm-visible {
+      visibility: visible;
+    }
+
+    xm-select>.xm-body .xm-tree .left-line {
+      position: absolute;
+      left: 13px;
+      width: 0;
+      z-index: 1;
+      border-left: 1px dotted #c0c4cc !important;
+    }
+
+    xm-select>.xm-body .xm-tree .top-line {
+      position: absolute;
+      left: 13px;
+      height: 0;
+      z-index: 1;
+      border-top: 1px dotted #c0c4cc !important;
+    }
+
+    xm-select>.xm-body .xm-tree .xm-tree-icon+.top-line {
+      margin-left: 1px;
+    }
+
+    xm-select>.xm-body .scroll-body>.xm-tree>.xm-option>.top-line,
+    xm-select>.xm-body .scroll-body>.xm-option>.top-line {
+      width: 0 !important;
+    }
+
+    xm-select>.xm-body .xm-cascader-box {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      padding: 5px 0;
+      border: 1px solid #E6E6E6;
+      background-color: #fff;
+      border-radius: 2px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+      margin: -1px;
+    }
+
+    xm-select>.xm-body .xm-cascader-box::before {
+      content: ' ';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: 6px solid transparent;
+      border-right-color: #E6E6E6;
+      top: 10px;
+      left: -12px;
+    }
+
+    xm-select>.xm-body .xm-cascader-box::after {
+      content: ' ';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: 6px solid transparent;
+      border-right-color: #fff;
+      top: 10px;
+      left: -11px;
+    }
+
+    xm-select>.xm-body .xm-cascader-scroll {
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    xm-select>.xm-body.cascader {
+      width: unset;
+      min-width: unset;
+    }
+
+    xm-select>.xm-body.cascader .xm-option-content {
+      padding-left: 8px;
+    }
+
+    xm-select>.xm-body.cascader .disabled .xm-right-arrow {
+      color: #C2C2C2 !important;
+    }
+
+    xm-select>.xm-body.cascader .hide-icon.disabled .xm-right-arrow {
+      color: #999 !important;
+    }
+
+    xm-select .xm-input {
+      cursor: pointer;
+      border-radius: 2px;
+      border-width: 1px;
+      border-style: solid;
+      border-color: #E6E6E6;
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      background-color: #FFF;
+      line-height: 1.3;
+      padding-left: 10px;
+      outline: 0;
+      user-select: text;
+      -ms-user-select: text;
+      -moz-user-select: text;
+      -webkit-user-select: text;
+    }
+
+    xm-select .dis {
+      display: none;
+    }
+
+    xm-select .loading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    xm-select .loader {
+      border: 0.2em dotted currentcolor;
+      border-radius: 50%;
+      -webkit-animation: 1s loader linear infinite;
+      animation: 1s loader linear infinite;
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      color: inherit;
+      vertical-align: middle;
+      pointer-events: none;
+    }
+
+    xm-select .xm-select-default {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: none;
+      visibility: hidden;
+    }
+
+    xm-select .xm-select-disabled {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      cursor: no-drop;
+      z-index: 2;
+      opacity: 0.3;
+      background-color: #FFF;
+    }
+
+    xm-select .item--divided {
+      border-top: 1px solid #ebeef5;
+      width: calc(100% - 20px);
+      cursor: initial;
+    }
+
+    xm-select .xm-right-arrow {
+      position: absolute;
+      color: ;
+      right: 5px;
+      top: -1px;
+      font-weight: 700;
+      transform: scale(0.6, 1);
+    }
+
+    xm-select .xm-right-arrow::after {
+      content: '>';
+    }
+
+    xm-select[size='large'] {
+      min-height: 40px;
+      line-height: 40px;
+    }
+
+    xm-select[size='large'] .xm-input {
+      height: 40px;
+    }
+
+    xm-select[size='large'] .xm-label .scroll .label-content {
+      line-height: 34px;
+    }
+
+    xm-select[size='large'] .xm-label .xm-label-block {
+      height: 30px;
+      line-height: 30px;
+    }
+
+    xm-select[size='large'] .xm-body .xm-option .xm-option-icon {
+      height: 20px;
+      width: 20px;
+      font-size: 20px;
+    }
+
+    xm-select[size='large'] .xm-paging>span {
+      height: 34px;
+      line-height: 34px;
+    }
+
+    xm-select[size='large'] .xm-tree .left-line {
+      height: 100%;
+      bottom: 20px;
+    }
+
+    xm-select[size='large'] .xm-tree .left-line-group {
+      height: calc(100% - 40px);
+    }
+
+    xm-select[size='large'] .xm-tree .xm-tree-icon.xm-hidden+.top-line {
+      top: 19px;
+    }
+
+    xm-select[size='large'] .item--divided {
+      margin: 10px;
+    }
+
+    xm-select {
+      min-height: 36px;
+      line-height: 36px;
+    }
+
+    xm-select .xm-input {
+      height: 36px;
+    }
+
+    xm-select .xm-label .scroll .label-content {
+      line-height: 30px;
+    }
+
+    xm-select .xm-label .xm-label-block {
+      height: 26px;
+      line-height: 26px;
+    }
+
+    xm-select .xm-body .xm-option .xm-option-icon {
+      height: 18px;
+      width: 18px;
+      font-size: 18px;
+    }
+
+    xm-select .xm-paging>span {
+      height: 30px;
+      line-height: 30px;
+    }
+
+    xm-select .xm-tree .left-line {
+      height: 100%;
+      bottom: 18px;
+    }
+
+    xm-select .xm-tree .left-line-group {
+      height: calc(100% - 36px);
+    }
+
+    xm-select .xm-tree .xm-tree-icon.xm-hidden+.top-line {
+      top: 17px;
+    }
+
+    xm-select .item--divided {
+      margin: 9px;
+    }
+
+    xm-select[size='small'] {
+      min-height: 32px;
+      line-height: 32px;
+    }
+
+    xm-select[size='small'] .xm-input {
+      height: 32px;
+    }
+
+    xm-select[size='small'] .xm-label .scroll .label-content {
+      line-height: 26px;
+    }
+
+    xm-select[size='small'] .xm-label .xm-label-block {
+      height: 22px;
+      line-height: 22px;
+    }
+
+    xm-select[size='small'] .xm-body .xm-option .xm-option-icon {
+      height: 16px;
+      width: 16px;
+      font-size: 16px;
+    }
+
+    xm-select[size='small'] .xm-paging>span {
+      height: 26px;
+      line-height: 26px;
+    }
+
+    xm-select[size='small'] .xm-tree .left-line {
+      height: 100%;
+      bottom: 16px;
+    }
+
+    xm-select[size='small'] .xm-tree .left-line-group {
+      height: calc(100% - 32px);
+    }
+
+    xm-select[size='small'] .xm-tree .xm-tree-icon.xm-hidden+.top-line {
+      top: 15px;
+    }
+
+    xm-select[size='small'] .item--divided {
+      margin: 8px;
+    }
+
+    xm-select[size='mini'] {
+      min-height: 28px;
+      line-height: 28px;
+    }
+
+    xm-select[size='mini'] .xm-input {
+      height: 28px;
+    }
+
+    xm-select[size='mini'] .xm-label .scroll .label-content {
+      line-height: 22px;
+    }
+
+    xm-select[size='mini'] .xm-label .xm-label-block {
+      height: 18px;
+      line-height: 18px;
+    }
+
+    xm-select[size='mini'] .xm-body .xm-option .xm-option-icon {
+      height: 14px;
+      width: 14px;
+      font-size: 14px;
+    }
+
+    xm-select[size='mini'] .xm-paging>span {
+      height: 22px;
+      line-height: 22px;
+    }
+
+    xm-select[size='mini'] .xm-tree .left-line {
+      height: 100%;
+      bottom: 14px;
+    }
+
+    xm-select[size='mini'] .xm-tree .left-line-group {
+      height: calc(100% - 28px);
+    }
+
+    xm-select[size='mini'] .xm-tree .xm-tree-icon.xm-hidden+.top-line {
+      top: 13px;
+    }
+
+    xm-select[size='mini'] .item--divided {
+      margin: 7px;
+    }
+
+    .layui-form-pane xm-select {
+      margin: -1px -1px -1px 0;
+    }
+
+
+    .list-card .yxmc {
+      color: #fff !important;
+    }
+
+    .list-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+      text-decoration: none;
+      display: block;
+      /* ✅ 关键：固定高度 */
+      height: 50px;
+      /* 根据设计调整 */
+      color: inherit;
+      overflow: hidden;
+      /* 超出隐藏 */
+    }
+
+    /* 学校名称和学历层次在同一行，不换行 */
+    .yxmc-wrap {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      /* ✅ 关键：强制单行 */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .yxmc {
+      font-weight: bold;
+      font-size: 16px;
+      /* ✅ 关键：省略号 */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 60%;
+      /* 防止太长挤占右侧 */
+    }
+
+    .cc {
+      color: #fff;
+      font-size: 14px;
+      /* ✅ 关键：省略号 */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 30%;
+    }
+
+    .des {
+      color: inherit;
+      font-size: 14px;
+      /* ✅ 关键：强制单行 */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .text-span {
+      color: #999;
+      padding: 10px 20px;
+      /* 上下15px，左右20px（可按需调整） */
+      margin-top: -20px;
+
+      /* 2. 缩小行间距（第二行与第一行的距离） */
+      line-height: 1.5;
+      /* 默认行高约1.5，调小至1.2-1.3更紧凑 */
+
+      /* 3. 限制容器宽度（确保文本换行，才能看到行间距效果） */
+      width: 300px;
+      /* 例如限制宽度为300px，文本会自动换行 */
+
+    }
+
+    /* 去除滚动条 */
+    html {
+      scrollbar-width: none;
+      /* Firefox */
+      -ms-overflow-style: none;
+      /* IE/Edge */
+    }
+
+    html::-webkit-scrollbar {
+      display: none;
+      /* Chrome/Safari */
+    }
+
+    body {
+      overflow: auto;
+      /* 允许滚动 */
+      margin: 0;
+    }
+
+    .van-nav-bar__left .van-icon-arrow-left {
+      transform: translateY(-12px);
+      /* 向上移动 2px，可按需调整 */
+    }
+  </style>
+
+</head>
+
+<body style="font-size: 12px;">
+  <div id="app" class="my-container">
+
+    <div class="green-header van-nav-bar van-hairline--bottom">
+      <div class="van-nav-bar__left"><i class="">
+          <!---->
+          <!---->
+        </i>
+        <!-- 返回按钮 -->
+        <div class="" @click="onClickLeft">
+          <i class="van-icon van-icon-arrow-left van-nav-bar__arrow"></i>
+        </div>
+
+      </div>
+      <div class="van-ellipsis van-nav-bar__title">高等教育信息</div>
+      <div class="van-nav-bar__right">
+        <!---->
+      </div>
+    </div>
+    <div class="vote-part" style="">
+      <div id="vote_wap" style="display: block;"><a
+          href="https://xz.chsi.com.cn/cp/survey/yhdy3/show.action?from=gdjy_index_wap" style="display:block"
+          onmousedown="clickVoteGa(this, 'zcsx')" class="vote-jy-part vote_bg_zcsx"></a></div>
+    </div>
+    <!---->
+    <div class="padding16 xjxl-list chsi-font">
+      <div class="list-tit van-row">
+        <div class="l van-col van-col--8">学籍信息 ({{ xjList.length }})</div>
+        <div class="r van-col van-col--16">还有学籍没有显示出来？<a href="javascript:;">尝试绑定</a></div>
+      </div>
+
+      <div class="xj list-card" v-for="item in xjList" :key="item.id">
+        <a href="#" @click.prevent="goToXjxx(item)">
+          <div class="yxmc-wrap">
+            <div class="yxmc">{{ item.schoolName }}</div>
+            <div class="cc">{{ item.educationLevel }}</div>
+          </div>
+          <div class="des">{{ item.major }}　|　{{ item.studyForm }}</div>
+        </a>
+      </div>
+
+      <!-- //不能删除 -->
+      <div class="list-tit van-row">
+
+
+
+        <div class="l van-col van-col--8">学历信息 ({{ xlList.length }})</div>
+
+        <div class="r van-col van-col--16">还有学历没有显示出来？<a href="javascript:;">尝试绑定</a>
+        </div>
+
+
+        <template v-for="(item, index) in xlList" :key="index">
+          <!-- 你提供的代码片段，原样循环 -->
+      </div>
+      <div class="xl list-card">
+        <a href="#" @click.prevent="goToXjxx(item)">
+          <div class="yxmc-wrap">
+            <div class="yxmc">{{ item.schoolName }}</div>
+            <div class="cc">{{ item.educationLevel }}</div>
+          </div>
+          <div class="des">{{ item.major }}　|　{{ item.studyForm }}</div>
+        </a>
+      </div>
+      </template>
+
+
+
+
+      <!-- 备用代码 -->
+      <!-- </div>
+             <div class="xl list-card"><a href="https://my.chsi.com.cn/archive/wap/gdjy/xl/detail.action?id=n5ofm6g8tepdtro5"><div class="yxmc-wrap"><div class="yxmc">学校</div> <div class="cc">本科</div></div> <div class="des">计算机科学与技术　|　普通全日制</div> -->
+
+      <!-- 这一行也不能删 -->
+
+      <div>
+
+
+
+        </a>
+        <!---->
+      </div>
+      <div class="list-tit van-row">
+        <div class="l van-col van-col--8">学位信息
+          <!---->
+        </div>
+
+        <div class="r van-col van-col--16">还有学位没有显示出来？<a href="javascript:;">尝试绑定</a></div>
+      </div>
+      <div class="no-data">
+        <h4 style="padding: 0px 0.3rem;">您还未绑定学位信息，可以使用“尝试绑定学位”功能绑定您的学位 <a href="https://www.chsi.com.cn/help/cxfw.jsp"
+            target="_blank"><i title="查看" class="iconfont"></i></a></h4>
+        <div class="find-xjxl">
+          <div class="find-list van-row">
+            <div class="van-col van-col--2"><span>1</span></div>
+            <div class="paddL2 van-col van-col--22">
+              本系统提供社会查询的学位证书数据来源于相关学位授予单位经所在省（自治区、直辖市）学位委员会办公室报国务院学位委员会办公室备案的学位授予数据。
+            </div>
+          </div>
+          <div class="find-list van-row">
+            <div class="van-col van-col--2"><span>2</span></div>
+            <div class="paddL2 van-col van-col--22">
+              请确保注册账号的“姓名”及“证件号码”无误，且对应的学位信息属于本系统<a href="https://www.chsi.com.cn/help/cxfw.jsp"
+                target="_blank">查询范围</a>，若您未成功绑定学位信息，请与有关学位授予单位的学位管理部门联系核实。
+            </div>
+          </div>
+          <div class="find-list van-row">
+            <div class="van-col van-col--2"><span>3</span></div>
+            <div class="paddL2 van-col van-col--22">
+              经核实后属学位授予信息漏报、错报的，由学位授予单位依照“学位授予信息补报、修改流程”更正相关内容。本网站无权修改任何数据。
+            </div>
+          </div>
+        </div>
+        <div class="find-xjxl-bottom"><span class="colorGreen">提示信息 <i title="展开" class="iconfont"></i></span></div>
+      </div>
+
+
+      <div class="list-tit van-row">
+        <div class="l van-col van-col--24">考研信息
+          <!---->
+        </div>
+      </div>
+
+
+      <div class="no-data">
+        <h4 style="padding: 0px 0.3rem;">您没有考研信息！<a href="https://www.chsi.com.cn/help/cxfw.jsp" target="_blank"><i
+              title="查看" class="iconfont"></i></a></h4>
+
+
+        <div class="text-span">您目前没有考研信息，系统提供2006年以来入学的硕士研究生报名和成绩数据。</div>
+
+      </div>
+      <!---->
+      <!---->
+
+      <!---->
+      <!---->
+      <!---->
+      <!---->
+
+
+
+
+      <div class="van-dialog" style="display: none;">
+        <!---->
+        <div class="van-dialog__content">
+          <div class="dialog-tip-div">
+            <h3>没有学籍</h3>
+            系统没有找到您的在校生学籍信息，有可能是因为您注册时填写的姓名和证件号码两项与学校上报的学籍注册数据不相同导致的。<br><br>
+            1、查看您注册时填写的姓名和证件号码信息 <a href="https://account.chsi.com.cn/account/account!show" target="_blank">点击查看</a><br>
+            2、姓名和证件号码无误，我还有学籍没显示出来 <a href="javascript:;">找找看？</a>
+          </div>
+        </div>
+        <div class="van-hairline--top van-dialog__footer"><button
+            class="van-button van-button--default van-button--large van-dialog__cancel" style="display: none;"><span
+              class="van-button__text">
+              取消
+            </span></button><button class="van-button van-button--default van-button--large van-dialog__confirm"><span
+              class="van-button__text">
+              确认
+            </span></button></div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+  </script>
+  <script>
+    var myVue = new Vue({
+      el: '#app',
+      data: function () {
+        return {
+          activeBottom: 0,
+          topText: '学信档案',//标题文字,
+          xjList: [
+            {
+              id: 'n5ofm6g8tepdtro5',
+              schoolName: '西北工业大学',
+              educationLevel: '本科',
+              major: '计算机科学与技术',
+              studyForm: '普通全日制',
+            },
+            // {
+            //   id: 'abc123',
+            //   schoolName: 'YY大学',
+            //   educationLevel: '本科',
+            //   major: '计算机科学与技术',
+            //   studyForm: '普通全日制',
+            // },
+
+
+          ],
+          xlList: [
+            {
+              id: 'abc123',
+              schoolName: '西北工业大学',
+              educationLevel: '本科',
+              major: '计算机科学与技术',
+              studyForm: '普通全日制',
+            },
+            //  {
+            //   id: 'abc123',
+            //   schoolName: '河北',
+            //   educationLevel: '本科',
+            //   major: '计算机科学与技术',
+            //   studyForm: '普通全日制',
+            // },
+            // {
+            //   id: 'abc123',
+            //   schoolName: 'hahaha',
+            //   educationLevel: '本科',
+            //   major: '计算机科学与技术',
+            //   studyForm: '普通全日制',
+            // },
+            // {
+            //   id: 'abc123',
+            //   schoolName: '奥里给',
+            //   educationLevel: '本科',
+            //   major: '计算机科学与技术',
+            //   studyForm: '普通全日制',
+            // },
+          ],
+        }
+      },
+      mixins: typeof mixin != 'undefined' ? [mixin] : {},
+      created: function () {
+        this.loadxlFromStorage()  //学历
+        this.loadxjFromStorage()
+      },
+      methods: {
+        defaultEducationItem: function (type) {
+          return {
+            id: type === 'xl' ? 'default-xl' : 'default-xj',
+            type: type,
+            schoolName: '西北工业大学',
+            educationLevel: '本科',
+            major: '计算机科学与技术',
+            studyForm: '普通全日制',
+          };
+        },
+        normalizeEducationList: function (key, type) {
+          var raw = localStorage.getItem(key);
+          var list = [];
+          var changed = false;
+          if (raw) {
+            try { list = JSON.parse(raw) || []; } catch (e) { list = []; changed = true; }
+          }
+          if (!Array.isArray(list) || list.length === 0) {
+            list = [this.defaultEducationItem(type)];
+            changed = true;
+          }
+          list = list.map(function (item) {
+            item = item || {};
+            if (item.schoolName === '北京大学' || item.schoolName === '清华大学' || !item.schoolName) { item.schoolName = '西北工业大学'; changed = true; }
+            if (item.educationLevel === '专科' || !item.educationLevel) { item.educationLevel = '本科'; changed = true; }
+            if (item.major === '工程造价' || !item.major) { item.major = '计算机科学与技术'; changed = true; }
+            if (!item.studyForm) { item.studyForm = '普通全日制'; changed = true; }
+            item.type = item.type || type;
+            item.id = item.id || (type === 'xl' ? 'default-xl' : 'default-xj');
+            return item;
+          });
+          if (changed) { localStorage.setItem(key, JSON.stringify(list)); }
+          return list;
+        },
+        syncDefaultEducationInfo: function () {
+          this.xlList = this.normalizeEducationList('xlList', 'xl');
+          this.xjList = this.normalizeEducationList('xjList', 'xj');
+        },
+        loadxlFromStorage: function () {
+          try {
+            const saved = localStorage.getItem('xlList');
+            if (saved) {
+              this.xlList = JSON.parse(saved);
+              
+            } else {
+              console.warn('⚠️ localStorage 中无数据');
+            }
+          } catch (e) {
+            console.error('❌ 加载失败:', e);
+            // 可选：清除损坏的数据
+            localStorage.removeItem('xlList');
+          }
+        },
+
+        loadxjFromStorage: function () {
+          try {
+            const saved = localStorage.getItem('xjList');
+            if (saved) {
+              this.xjList = JSON.parse(saved);
+              // console.log('✅ 数据已从 localStorage 加载');
+            } else {
+              console.warn('⚠️ localStorage 中无数据');
+            }
+          } catch (e) {
+            console.error('❌ 加载失败:', e);
+            // 可选：清除损坏的数据
+            localStorage.removeItem('xlList');
+          }
+        },
+
+        onClickLeft: function () { //左上的返回按钮
+          history.back(-1);
+        },
+        goToIndex: function () {
+          window.location.href = 'https://my.chsi.com.cn/archive/wap/index.action';
+        },
+        goToXjxx(item) {
+          const url = '/xjxx.html?info=' + encodeURIComponent(JSON.stringify(item));
+          // console.log('🔗 跳转链接:', url); // ←←← 看这里是否包含有效数据
+          window.location.href = url;
+        }
+
+      }
+    });
+  </script>
+
+  <script type="text/javascript">
+
+
+
+  </script>
+
+<!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "f4657eed149046468ff6ed4c629ea0a0"}'></script><!-- Cloudflare Pages Analytics --></body>
+
+</html>

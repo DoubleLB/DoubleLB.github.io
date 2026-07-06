@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="./favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>学信网</title>
+  <script type="module" crossorigin src="./assets/index-C-sc3Fg2.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BiCCTU3I.css">
+</head>
+<body>
+  <div id="app"></div>
+  <script id="local-student-defaults">
+    (function () {
+      var defaults = {
+        sfzh: '610632200604192010',
+        xh: '202407020419',
+        csrq: '2006年04月19日',
+        rxrq: '2024年09月01日',
+        byrq: '2028年06月30日',
+        xz: '4年',
+        bh: '2024级1班',
+        fy: '信息科学技术学院',
+        xsh: '信息科学技术学院'
+      };
+      var oldDefaults = {
+        sfzh: ['11010119990515XXXX', ''],
+        xh: ['2019123456', ''],
+        csrq: ['1999?05?15?', ''],
+        rxrq: ['2019?09?01?', ''],
+        byrq: ['2023?06?30?', ''],
+        xz: ['', null],
+        bh: ['2019?1?', ''],
+        fy: ['????????', ''],
+        xsh: ['????', '']
+      };
+      var info = {};
+      try { info = JSON.parse(localStorage.getItem('studentInfo') || '{}') || {}; } catch (e) { info = {}; }
+      Object.keys(defaults).forEach(function (key) {
+        if (info[key] == null || info[key] === '' || (oldDefaults[key] || []).indexOf(info[key]) !== -1) {
+          info[key] = defaults[key];
+        }
+      });
+      localStorage.setItem('studentInfo', JSON.stringify(info));
+    })();
+  </script>
+  <script>
+    (function () {
+      var defaults = {
+        xl: { id: 'default-xl', type: 'xl', schoolName: '西北工业大学', educationLevel: '本科', major: '计算机科学与技术', studyForm: '普通全日制' },
+        xj: { id: 'default-xj', type: 'xj', schoolName: '西北工业大学', educationLevel: '本科', major: '计算机科学与技术', studyForm: '普通全日制' }
+      };
+      function normalize(key, fallback) {
+        var raw = localStorage.getItem(key);
+        var list = [];
+        var changed = false;
+        if (raw) {
+          try { list = JSON.parse(raw) || []; } catch (e) { list = []; changed = true; }
+        }
+        if (!Array.isArray(list) || list.length === 0) {
+          list = [Object.assign({}, fallback)];
+          changed = true;
+        }
+        list = list.map(function (item) {
+          item = item || {};
+          if (item.schoolName === '北京大学' || item.schoolName === '清华大学' || !item.schoolName) { item.schoolName = '西北工业大学'; changed = true; }
+          if (item.educationLevel === '专科' || !item.educationLevel) { item.educationLevel = '本科'; changed = true; }
+          if (item.major === '工程造价' || !item.major) { item.major = '计算机科学与技术'; changed = true; }
+          if (!item.studyForm) { item.studyForm = '普通全日制'; changed = true; }
+          item.type = item.type || fallback.type;
+          item.id = item.id || fallback.id;
+          return item;
+        });
+        if (changed) localStorage.setItem(key, JSON.stringify(list));
+      }
+      normalize('xlList', defaults.xl);
+      normalize('xjList', defaults.xj);
+    })();
+  </script>
+</body>
+</html>
